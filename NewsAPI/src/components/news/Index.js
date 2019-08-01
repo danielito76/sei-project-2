@@ -15,31 +15,35 @@ class NewsIndex extends React.Component {
     }
 
     this.filterNews = this.filterNews.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSort = this.handleSort.bind(this)
+    this.newsUpdate = this.newsUpdate.bind(this)
   }
 
   componentDidMount() {
-    console.log('Component has mounted - rendered for the first time... The perfect place for AJAX request')
-    axios.get('https://newsapi.org/v2/top-headlines?country=gb&apiKey=4be4c301dce44ea39109dbab5299296b')
-      .then(res => this.setState({newsapi: res.data.articles}))
-
-
-    // fetch('https://newsapi.org/v2/top-headlines?country=gb&apiKey=4be4c301dce44ea39109dbab5299296b')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({ newsapi: data.articles })
-    //   })
-    // this.updateNews()
-    // setInterval(() => this.updateNews(), 5000)
+    this.newsUpdate()
+    this.interval = setInterval(() => this.newsUpdate(), 60000)//set up an interval that refreshes every minute
   }
 
-  handleKeyDown(e) {
-    this.setState({ searchTerm: e.target.value })
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
-  handleChange(e){
+
+  handleSearch(e) {
+    this.setState({ searchTerm: e.target.value })//search the
+  }
+
+  handleSort(e){
     this.setState({sortTerm: e.target.value})
+  }
+
+
+  newsUpdate(){
+    console.log('new news...')
+    axios.get('https://newsapi.org/v2/top-headlines?country=gb&apiKey=4be4c301dce44ea39109dbab5299296b')
+      .then(res => this.setState({newsapi: res.data.articles}))// function that gets the data from the articles array
+
   }
 
   filterNews() {
@@ -63,13 +67,13 @@ class NewsIndex extends React.Component {
           <div className="columns">
             <div className="column">
               <div className="field">
-                <input placeholder="search" className="input" onKeyDown={this.handleKeyDown}/>
+                <input placeholder="search" className="input" onChange={this.handleSearch}/>
               </div>
             </div>
             <div className="column">
               <div className="field">
                 <div className="select is-fullwidth">
-                  <select onChange={this.handleChange}>
+                  <select onChange={this.handleSort}>
                     <option value="all">All</option>
                     <option value="source.name|asc">Name A-Z</option>
                     <option value="source.name|desc">Name Z-A</option>
@@ -85,7 +89,11 @@ class NewsIndex extends React.Component {
             {this.filterNews().map(news =>
               //above we invoke the function filterNews to map over
               <div className="column is-half-tablet is-one-quarter-desktop" key={news.url}>
-                <Link to ={`/news/${news._id}`}>
+
+                <Link to={{
+                  pathname: '/article',
+                  state: news
+                }}>
                   <Card
                     name={news.source.name}
                     title={news.title}
