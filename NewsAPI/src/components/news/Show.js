@@ -1,8 +1,8 @@
 //show.js acts as the filter to search and read up a single news item/page
 
 import React from 'react'
-import axios from 'axios'
-import {Link} from 'react-router-dom'
+
+
 
 
 
@@ -37,7 +37,9 @@ class NewsShow extends React.Component {
             </div>
             <div className="column">
               <p>{this.state.news.content}</p>
-              <a href={this.state.news.url} target ="_blank" rel="noopener noreferrer">{this.state.news.url}</a>
+              <p className="satellite"> 📡
+                <a href={this.state.news.url} target ="_blank" rel="noopener noreferrer">{this.state.news.url}</a>
+              </p>
             </div>
           </div>
         </div>

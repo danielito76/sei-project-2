@@ -10,7 +10,7 @@ class NewsIndex extends React.Component {
   constructor(){
     super()
     this.state = {
-      searchTerm: '',//this.state has to store the data for the searchTerm and sortTerm coming from filterWines function
+      searchTerm: '',//this.state has to store the data for the searchTerm and sortTerm coming from     filterWines function
       sortTerm: 'date|asc'
     }
 
@@ -58,54 +58,70 @@ class NewsIndex extends React.Component {
     return sortedNews
   }
 
+  filterlatestNews(){
+    let filterlatestNews = {filterNews[0].publishedAt}
+  }
+
   render() {
     console.log(this.state.newsapi) // if gonna console.log state do it in the render method
     if(!this.state.newsapi) return <h2>Loading...</h2>
     return (
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column">
-              <div className="field">
-                <input placeholder="search" className="input" onChange={this.handleSearch}/>
-              </div>
+
+      <div>
+
+        <section className="hero is-primary is-medium">
+          <div id="header" className="hero-body">
+            <div className="container has-text-centered">
             </div>
-            <div className="column">
-              <div className="field">
-                <div className="select is-fullwidth">
-                  <select onChange={this.handleSort}>
-                    <option value="all">All</option>
-                    <option value="source.name|asc">Name A-Z</option>
-                    <option value="source.name|desc">Name Z-A</option>
-                    <option value="publishedAt|asc">News Latest</option>
-                    <option value="publishedAt|desc">News Oldest</option>
-                  </select>
+          </div>
+        </section>
+
+
+        <section className="section">
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <div className="field">
+                  <input placeholder="search" className="input" onChange={this.handleSearch}/>
+                </div>
+              </div>
+              <div className="column">
+                <div className="field">
+                  <div className="select is-fullwidth">
+                    <select onChange={this.handleSort}>
+                      <option value="all">All</option>
+                      <option value="source.name|asc">Name A-Z</option>
+                      <option value="source.name|desc">Name Z-A</option>
+                      <option value="publishedAt|asc">News Latest</option>
+                      <option value="publishedAt|desc">News Oldest</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="columns is-multiline">
-            {this.filterNews().map(news =>
-              //above we invoke the function filterNews to map over
-              <div className="column is-half-tablet is-one-quarter-desktop" key={news.url}>
+            <div className="columns is-multiline">
+              {this.filterNews().map(news =>
+                //above we invoke the function filterNews to map over
+                <div className="column is-half-tablet is-one-quarter-desktop" key={news.url}>
 
-                <Link to={{
-                  pathname: '/article',
-                  state: news
-                }}>
-                  <Card
-                    name={news.source.name}
-                    title={news.title}
-                    description={news.description}
-                    image={news.urlToImage}
-                  />
-                </Link>
-              </div>
-            )}
+                  <Link to={{
+                    pathname: '/article',//A link to the pathname article, which carries the news from state
+                    state: news
+                  }}>
+                    <Card
+                      name={news.source.name}
+                      title={news.title}
+                      description={news.description}
+                      image={news.urlToImage}
+                    />
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     )
   }
 }
