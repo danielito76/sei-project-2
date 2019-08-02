@@ -23,7 +23,7 @@ class NewsIndex extends React.Component {
 
   componentDidMount() {
     this.newsUpdate('gb')
-    this.interval = setInterval(() => this.newsUpdate(), 60000)//set up an interval that refreshes every minute
+    this.interval = setInterval(() => this.newsUpdate(), 60000)
   }
 
   componentWillUnmount() {
@@ -32,7 +32,7 @@ class NewsIndex extends React.Component {
 
 
   handleSearch(e) {
-    this.setState({ searchTerm: e.target.value })//search the
+    this.setState({ searchTerm: e.target.value })
   }
 
   handleSort(e){

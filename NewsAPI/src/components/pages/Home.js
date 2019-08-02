@@ -12,7 +12,7 @@ class Home extends React.Component {
     super()
     this.state = {
       searchTerm: '',//this.state has to store the data for the searchTerm and sortTerm coming from     filterWines function
-      sortTerm: 'date|asc'
+      sortTerm: 'publishedAt|asc'
     }
 
     this.filterNews = this.filterNews.bind(this)
