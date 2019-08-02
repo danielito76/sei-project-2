@@ -11,17 +11,18 @@ class NewsIndex extends React.Component {
     super()
     this.state = {
       searchTerm: '',//this.state has to store the data for the searchTerm and sortTerm coming from     filterWines function
-      sortTerm: 'date|asc'
+      sortTerm: 'publishedAt|asc'
     }
 
     this.filterNews = this.filterNews.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSort = this.handleSort.bind(this)
     this.newsUpdate = this.newsUpdate.bind(this)
+    this.handleCountry = this.handleCountry.bind(this)
   }
 
   componentDidMount() {
-    this.newsUpdate()
+    this.newsUpdate('gb')
     this.interval = setInterval(() => this.newsUpdate(), 60000)//set up an interval that refreshes every minute
   }
 
@@ -38,10 +39,14 @@ class NewsIndex extends React.Component {
     this.setState({sortTerm: e.target.value})
   }
 
+  handleCountry(e) {
+    this.newsUpdate(e.target.value)
+  }
 
-  newsUpdate(){
+
+  newsUpdate(countryCode){
     console.log('new news...')
-    axios.get('https://newsapi.org/v2/top-headlines?country=gb&apiKey=4be4c301dce44ea39109dbab5299296b')
+    axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWSAPI_KEY}`)
       .then(res => this.setState({newsapi: res.data.articles}))// function that gets the data from the articles array
 
   }
@@ -58,13 +63,12 @@ class NewsIndex extends React.Component {
     return sortedNews
   }
 
-  filterlatestNews(){
-    let filterlatestNews = {filterNews[0].publishedAt}
-  }
 
   render() {
-    console.log(this.state.newsapi) // if gonna console.log state do it in the render method
     if(!this.state.newsapi) return <h2>Loading...</h2>
+    const latestNews = _.head(this.filterNews())
+    console.log(latestNews)
+
     return (
 
       <div>
@@ -89,11 +93,25 @@ class NewsIndex extends React.Component {
                 <div className="field">
                   <div className="select is-fullwidth">
                     <select onChange={this.handleSort}>
-                      <option value="all">All</option>
                       <option value="source.name|asc">Name A-Z</option>
                       <option value="source.name|desc">Name Z-A</option>
                       <option value="publishedAt|asc">News Latest</option>
                       <option value="publishedAt|desc">News Oldest</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="column">
+                <div className="field">
+                  <div className="select is-fullwidth">
+                    <select onChange={this.handleCountry}>
+                      <option value="gb">United Kingdom</option>
+                      <option value="us">United States of America</option>
+                      <option value="ng">Nigeria</option>
+                      <option value="it">Italy</option>
+                      <option value="ru">Russia</option>
+                      <option value="pl">Poland</option>
+                      <option value="co">Columbia</option>
                     </select>
                   </div>
                 </div>
@@ -114,6 +132,7 @@ class NewsIndex extends React.Component {
                       title={news.title}
                       description={news.description}
                       image={news.urlToImage}
+
                     />
                   </Link>
                 </div>

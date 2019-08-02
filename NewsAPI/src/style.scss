@@ -30,7 +30,6 @@ p{
 
 a:hover {
   colour: red;
-  text-align: center;
   text-decoration: underline;
 }
 
@@ -50,6 +49,14 @@ button.browse{
 a.navbar-item{
   padding:5px;
   border:5px;
+}
+
+h2{
+  color: black;
+}
+
+#ejikeStyle {
+  color: black;
 }
 
 @import '~bulma'
