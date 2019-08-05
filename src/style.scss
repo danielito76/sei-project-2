@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Grenze&display=swap');
+$family-primary: 'Grenze';
+
+img{
+  height: 100px;
+}
+.section{
+  background-color: #dbdbdb;
+}
+
+nav.navbar{
+  background-color: white;
+}
+
+#header {
+ background-color: white;
+ background-image: url('/components/img/news_api_header.jpg');
+ background-size: contain;
+ background-repeat: no-repeat;
+ background-position: center;
+}
+
+p{
+  text-align: center;
+}
+
+.satellite{
+  margin: 5px;
+}
+
+a:hover {
+  colour: red;
+  text-decoration: underline;
+}
+
+a{
+    color: #3273dc;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 10px;
+}
+
+button.browse{
+  border-radius: 12px;
+  font-size: 16px;
+  padding:-15px 30px;
+
+}
+a.navbar-item{
+  padding:5px;
+  border:5px;
+}
+
+h2{
+  color: black;
+}
+
+#ejikeStyle {
+  color: black;
+}
+
+@import '~bulma'
