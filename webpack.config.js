@@ -12,7 +12,8 @@ module.exports = {
     rules: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
-      { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] }
+      { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.(jpg|png|gif)/, loader: 'file-loader' }
     ]
   },
   devServer: {
