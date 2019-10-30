@@ -193,11 +193,11 @@ newsUpdate(countryCode){
 The Online Mirror - Landing page
 ![Landing page](/src/img/readme-screenshots/THE_OL_MIRROR_LP.png)
 The Online Mirror - Index
-![FIndex](/src/img/readme-screenshots/THE_OL_MIRROR_Index.PNG)
+![Index](/src/img/readme-screenshots/THE_OL_MIRROR_Index.png)
 The Online Mirror - Show page
-![Show page](/src/img/readme-screenshots/THE_OL_MIRROR_Show.PNG)
+![Show page](/src/img/readme-screenshots/THE_OL_MIRROR_Show.png)
 The Online Mirror - Original source
-![Original source](/src/img/readme-screenshots/THE_OL_MIRROR_Source.PNG)
+![Original source](/src/img/readme-screenshots/THE_OL_MIRROR_Source.png)
 
 
 
